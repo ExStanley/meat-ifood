@@ -1,0 +1,6 @@
+<div>
+  Curso: <a (click)="clicked()" >{{ prod?.name }}</a>
+  <div *ngIf="prod?.isVisible">
+    Descrição: {{ prod?.desc }}
+  </div>
+</div>
