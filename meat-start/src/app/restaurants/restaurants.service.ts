@@ -1,21 +1,14 @@
 import { MET_API } from './../app.api';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Restaurant } from './restaurant/restaurant.model';
-import { Observable } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
-import { ErrorHandler } from '../app.error-handler';
+import { BaseService } from '../services/base-service.service';
 
-@Injectable()
-export class RestaurantsService {
-  constructor(private http: HttpClient) {}
-
-  restaurants(): Observable<Restaurant[]> {
-    return this.http
-      .get<Restaurant[]>(`${MET_API}/restaurants`)
-      .pipe(
-        retry(2),
-        catchError(ErrorHandler.handleError)
-      );
+@Injectable({ providedIn: 'root' })
+export class RestaurantsService extends BaseService<Restaurant> {
+  constructor(http: HttpClient) {
+    super(http, MET_API, 'restaurants');
   }
 }
