@@ -6,4 +6,6 @@ export interface Restaurant extends EntityBase {
   deliveryEstimate: string;
   rating: number;
   imagePath: string;
+  about: string;
+  hours: string;
 }

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  retray: 2
+  retray: 2,
+  url: 'http://localhost:3000',
+  endRestaurants: 'restaurants'
 };
 
 /*

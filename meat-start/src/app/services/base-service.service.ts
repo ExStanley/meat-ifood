@@ -63,7 +63,7 @@ export class BaseService<T extends EntityBase> {
       .pipe(retry(2), catchError(this.handleError));
   }
 
-  private handleError(error: HttpErrorResponse) {
+  public handleError(error: HttpErrorResponse) {
     let errorMessage = '';
 
     if (error.error instanceof ErrorEvent) {

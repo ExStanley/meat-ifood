@@ -1,0 +1,56 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+    x
+  </button>
+  <div class="modal-body {{ modalBodyClass }}">
+    <div class="row">
+      <div class="col-md-12">
+        <ngb-alert
+          *ngIf="resultAlert"
+          (close)="closeAlert()"
+          type="getAlertCss(alert.type"
+          [dismissible]="true"
+          >{{ resultAlert.message }}</ngb-alert
+        >
+        <!-- [formGroup]="formGroup" -->
+        <form
+          class="needs-validation"
+          name="form"
+          novalidate
+        >
+          <ng-content></ng-content>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer" *ngIf="showActionButtons">
+  <button
+    type="button"
+    *ngIf="showExport"
+    class="btn btn-secondary waves-effect waves-light"
+    [disabled]="exporting"
+    (click)="onExportEvent()"
+  >
+    <i class="fas fa-cloud-upload-alt"></i> Exportar
+  </button>
+  <button
+    type="button"
+    *ngIf="showAction"
+    class="btn btn-secondary waves-effect waves-light"
+    [disabled]="disabledBtnLimpar"
+    (click)="onClearEvent()"
+  >
+    <i class="fas fa-eraser"></i> Limpar
+  </button>
+  <button
+    type="button"
+    *ngIf="showAction"
+    class="btn btn-secondary waves-effect waves-light"
+    [disabled]="disabledBtnSalvar"
+    (click)="onSubmitEvent()"
+  >
+    <i class="fas fa-eraser"></i> Salvar
+  </button>
+</div>
