@@ -1,0 +1,88 @@
+<!--INICIO DO CONTEUDO-->
+<section class="content-header">
+</section>
+
+<section class="content">
+  <section class="invoice">
+
+    <form #form="ngForm" novalidade>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="page-header">
+            <i class="fa fa-shopping-cart"></i> Finalize o seu pedido
+          </h2>
+        </div>
+      </div>
+
+      <div class="row invoice-info">
+        <div class="col-xs-12">
+          <p class="lead">Endereço de Entrega:</p>
+        </div>
+        <div class="col-sm-6 col-xs-12">
+          <app-input-container label="Endereço" errorMessage="Campo obrigatório">
+            <input class="form-control" name="address" ngModel required minlength="5" autocomplete="off">
+          </app-input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+          <app-input-container label="Número" errorMessage="obrigatório somente números">
+            <input class="form-control" name="number" pattern="^[0-9]*$" ngModel required autocomplete="off">
+          </app-input-container>
+        </div>
+
+        <div class="col-sm-3 col-xs-6">
+          <app-input-container label="Complemento" >
+            <input class="form-control" name="optionalAddress" ngModel autocomplete="off">
+          </app-input-container>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="lead">Itens do Pedido:</p>
+        </div>
+        <app-order-items class="col-xs-12"
+              [items]="cartItems()"
+              (increaseQty)="increaseQty($event)"
+              (decreaseQty)="decreaseQty($event)"
+              (remove)="remove($event)">
+        </app-order-items>
+      </div>
+      <!-- /.row -->
+
+      <div class="row">
+        <!-- accepted payments column -->
+        <div class="col-sm-6 col-xs-12">
+          <p class="lead">Formas de Pagamento:</p>
+
+          <div class="form-group">
+            <app-radio [options]="paymentOptions" name="paymentOption" ngModel required ></app-radio>
+          </div>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-6 col-xs-12">
+          <p class="lead">Frete e Total:</p>
+          <app-delivery-costs
+            [delivery]="delivery"
+            [itemsValue]="itemsValue()"
+          ></app-delivery-costs>
+        </div>
+        <!-- /.col -->
+      </div>
+
+    </form>
+
+    <div class="row">
+      <div class="col-xs-12">
+          <button (click)="checkOrder(form.value)" class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0">
+            <i class="fa fa-credit-card"></i> Concluir Pedido
+          </button>
+      </div>
+    </div>
+
+  </section>
+</section>
+<!-- FIM DO CONTEUDO-->

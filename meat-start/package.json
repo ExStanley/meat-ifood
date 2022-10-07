@@ -24,11 +24,11 @@
     "bootstrap": "^3.3.6",
     "core-js": "2.4.1",
     "font-awesome": "^4.5.0",
-    "intl": "1.2.5",
+    "intl": "^1.2.5",
     "ionicons": "^2.0.1",
     "jquery": "3.1.1",
     "reflect-metadata": "0.1.9",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

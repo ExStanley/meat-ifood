@@ -3,10 +3,10 @@
     <app-menu-item
       *ngFor="let item of menu | async"
       [menuItem]="item"
-      (add)="addMenuItem($event)"></app-menu-item>
+      (add)="shoppingCart.addItem($event)"></app-menu-item>
 
   </div>
   <div class="col-md-4">
-    <app-shopping-cart></app-shopping-cart>
+    <app-shopping-cart #shoppingCart></app-shopping-cart>
   </div>
 </div>

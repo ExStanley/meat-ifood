@@ -1,10 +1,11 @@
+import { OrderService } from './order/order.service';
+import { ShoppingCartService } from './restaurant-detail/shopping-cart/shopping-cart.service';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ROUTES } from './app.routes';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import { LOCALE_ID,DEFAULT_CURRENCY_CODE, NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -17,11 +18,19 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { ShoppingCartComponent } from './restaurant-detail/shopping-cart/shopping-cart.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { FormsModule } from '@angular/forms';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatCardModule} from '@angular/material/card';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { OrderComponent } from './order/order.component';
+import { InputComponent } from './shared/input/input.component';
+import { RadioComponent } from './shared/radio/radio.component';
+import { OrderItemsComponent } from './order/order-items/order-items.component';
+import { DeliveryCostsComponent } from './order/delivery-costs/delivery-costs.component';
 
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
   declarations: [
@@ -37,6 +46,11 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
     MenuComponent,
     MenuItemComponent,
     ReviewsComponent,
+    OrderComponent,
+    InputComponent,
+    RadioComponent,
+    OrderItemsComponent,
+    DeliveryCostsComponent,
   ],
   imports: [
     FormsModule,
@@ -45,9 +59,15 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
   ],
-  providers: [RestaurantsService],
-  bootstrap: [AppComponent]
+  providers: [
+    RestaurantsService,
+    ShoppingCartService,
+    OrderService,
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide:  DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
