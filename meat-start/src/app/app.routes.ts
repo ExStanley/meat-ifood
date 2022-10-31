@@ -1,12 +1,14 @@
-import { OrderComponent } from './order/order.component';
-import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { Routes } from '@angular/router';
 
-import { AboutComponent } from './about/about.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { MenuComponent } from './restaurant-detail/menu/menu.component';
+
 import { HomeComponent } from './home/home.component';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
+import { AboutModule } from './about/about.module';
+import { OrderModule } from './order/order.module';
 
 export const ROUTES: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +21,8 @@ export const ROUTES: Routes = [
       { path: 'reviews', component: ReviewsComponent },
     ],
   },
-  { path: 'order', component: OrderComponent },
-  { path: 'about', component: AboutComponent },
+  { path: 'about', loadChildren: () => import('./about/about.module').then(m => m.AboutModule) },
+  { path: 'order', loadChildren: () => import('./order/order.module').then(m=>m.OrderModule) },
+  { path: 'order-summary', component: OrderSummaryComponent },
+
 ];

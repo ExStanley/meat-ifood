@@ -34,7 +34,8 @@ export class OrderService {
     }
     return this.http.post(`${MET_API.url}/orders`, JSON.stringify(order), options)
     .pipe(
-      map(response => JSON.stringify(response))
+      map(response => JSON.stringify(response)),
+      map(order => JSON.parse(order).id)
       )
   }
 
