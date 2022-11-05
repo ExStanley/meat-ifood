@@ -1,8 +1,7 @@
-import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ROUTES } from './app.routes';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID,DEFAULT_CURRENCY_CODE } from '@angular/core';
@@ -48,7 +47,7 @@ registerLocaleData(localePt, 'pt');
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule.forRoot(),
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
