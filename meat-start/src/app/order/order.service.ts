@@ -29,15 +29,22 @@ export class OrderService {
   }
 
   checkOrder(order: Order): Observable<string>{
-    const options = {
-      headers: new HttpHeaders().append('Content-Type', 'application/json')
-    }
-    return this.http.post(`${MET_API.url}/orders`, JSON.stringify(order), options)
+    return this.http.post<Order>(`${MET_API.url}/orders`, order)
     .pipe(
-      map(response => JSON.stringify(response)),
-      map(order => JSON.parse(order).id)
-      )
+      map(order => order.id)
+    )
   }
+
+  // checkOrder(order: Order): Observable<string>{
+  //   const options = {
+  //     headers: new HttpHeaders().append('Content-Type', 'application/json')
+  //   }
+  //   return this.http.post(`${MET_API.url}/orders`, JSON.stringify(order), options)
+  //   .pipe(
+  //     map(response => JSON.stringify(response)),
+  //     map(order => JSON.parse(order).id)
+  //     )
+  // }
 
   clear(){
     this.cartService.clear()

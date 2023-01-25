@@ -4,7 +4,7 @@ import { ROUTES } from './app.routes';
 import { PreloadAllModules, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, LOCALE_ID,DEFAULT_CURRENCY_CODE } from '@angular/core';
+import { NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -18,9 +18,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component';
-import { registerLocaleData } from '@angular/common';
+import {
+  HashLocationStrategy,
+  LocationStrategy,
+  registerLocaleData,
+} from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './security/login/login.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -38,7 +44,8 @@ registerLocaleData(localePt, 'pt');
     MenuItemComponent,
     ReviewsComponent,
     OrderSummaryComponent,
-
+    NotFoundComponent,
+    LoginComponent,
   ],
   imports: [
     MatTabsModule,
@@ -47,13 +54,13 @@ registerLocaleData(localePt, 'pt');
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule.forRoot(),
-    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules})
+    RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules }),
   ],
   providers: [
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
     { provide: LOCALE_ID, useValue: 'pt' },
-    { provide:  DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' },
   ],
   bootstrap: [AppComponent],
-
 })
 export class AppModule {}

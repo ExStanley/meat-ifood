@@ -1,12 +1,15 @@
+import { environment } from './../../environments/environment.prod';
 import { retry, catchError } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
+  HttpParams,
 } from '@angular/common/http';
 import EntityBase from '../models/base.model';
 import { Injectable } from '@angular/core';
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,16 +28,21 @@ export class BaseService<T extends EntityBase> {
     }),
   };
 
-  get(): Observable<T[]> {
+  get(search?: string): Observable<T[]> {
+    let params: HttpParams = undefined
+    if(search){
+      params = new HttpParams().set('q', search)
+    }
+    // search = (typeof search === 'undefined')? '' : search
     return this.httpClient
-      .get<T[]>(`${this.url}/${this.endpoint}`)
-      .pipe(retry(2), catchError(this.handleError));
+      .get<T[]>(`${this.url}/${this.endpoint}`, {params: params})
+      .pipe(retry(environment.retray), catchError(this.handleError));
   }
 
   getById(id: number): Observable<T> {
     return this.httpClient
       .get<T>(`${this.url}/${this.endpoint}/${id}`)
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(environment.retray), catchError(this.handleError));
   }
 
   create(item: T): Observable<T> {
@@ -44,7 +52,7 @@ export class BaseService<T extends EntityBase> {
         JSON.stringify(item),
         this.httpOptions
       )
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(environment.retray), catchError(this.handleError));
   }
 
   update(item: T): Observable<T> {
@@ -54,13 +62,13 @@ export class BaseService<T extends EntityBase> {
         JSON.stringify(item),
         this.httpOptions
       )
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(environment.retray), catchError(this.handleError));
   }
 
   delete(item: T) {
     return this.httpClient
       .delete<T>(`${this.url}/${this.endpoint}/${item.id}`, this.httpOptions)
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(retry(environment.retray), catchError(this.handleError));
   }
 
   public handleError(error: HttpErrorResponse) {

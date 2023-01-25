@@ -35,6 +35,7 @@
               "./src/assets/css/skins/skin-red.css",
               "./src/plugins/iCheck/flat/red.css",
               "./src/assets/css/meat.css",
+              "./src/styles.css",
               "./src/styles.scss"
             ],
             "scripts": []

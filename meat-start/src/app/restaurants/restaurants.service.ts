@@ -19,7 +19,7 @@ export class RestaurantsService extends BaseService<Restaurant> {
   reviewsOfRestaurant(id: string): Observable<any>{
     return this.http.get<any>(`${MET_API.url}/${MET_API.endRestaurants}/${id}/reviews`)
     .pipe(
-      retry(environment.retray),
+      retry(2),
       catchError(this.handleError)
     )
   }
@@ -27,7 +27,7 @@ export class RestaurantsService extends BaseService<Restaurant> {
   menuOfRestaurant(id: string): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(`${MET_API.url}/${MET_API.endRestaurants}/${id}/menu`)
     .pipe(
-      retry(environment.retray),
+      retry(2),
       catchError(this.handleError)
     )
   }

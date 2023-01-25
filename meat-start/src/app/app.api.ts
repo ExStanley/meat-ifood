@@ -1,5 +1,6 @@
+import { environment } from './../environments/environment.prod';
 export const MET_API = {
-  url: 'http://localhost:3000',
+  url: environment.url,
   endRestaurants: 'restaurants',
   endMenu:'menu'
 }
