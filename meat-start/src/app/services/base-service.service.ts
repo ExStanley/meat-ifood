@@ -36,13 +36,13 @@ export class BaseService<T extends EntityBase> {
     // search = (typeof search === 'undefined')? '' : search
     return this.httpClient
       .get<T[]>(`${this.url}/${this.endpoint}`, {params: params})
-      .pipe(retry(environment.retray), catchError(this.handleError));
+      .pipe(retry(environment.retray));
   }
 
   getById(id: number): Observable<T> {
     return this.httpClient
       .get<T>(`${this.url}/${this.endpoint}/${id}`)
-      .pipe(retry(environment.retray), catchError(this.handleError));
+      .pipe(retry(environment.retray));
   }
 
   create(item: T): Observable<T> {
@@ -52,7 +52,7 @@ export class BaseService<T extends EntityBase> {
         JSON.stringify(item),
         this.httpOptions
       )
-      .pipe(retry(environment.retray), catchError(this.handleError));
+      .pipe(retry(environment.retray));
   }
 
   update(item: T): Observable<T> {
@@ -62,27 +62,27 @@ export class BaseService<T extends EntityBase> {
         JSON.stringify(item),
         this.httpOptions
       )
-      .pipe(retry(environment.retray), catchError(this.handleError));
+      .pipe(retry(environment.retray));
   }
 
   delete(item: T) {
     return this.httpClient
       .delete<T>(`${this.url}/${this.endpoint}/${item.id}`, this.httpOptions)
-      .pipe(retry(environment.retray), catchError(this.handleError));
+      .pipe(retry(environment.retray));
   }
 
-  public handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
+  // public handleError(error: HttpErrorResponse) {
+  //   let errorMessage = '';
 
-    if (error.error instanceof ErrorEvent) {
-      //error client
-      errorMessage = error.error.message;
-    } else {
-      //error server
-      errorMessage =
-        `Código do erro: ${error.status}, ` + `mensagem: ${error.message}`;
-    }
+  //   if (error.error instanceof ErrorEvent) {
+  //     //error client
+  //     errorMessage = error.error.message;
+  //   } else {
+  //     //error server
+  //     errorMessage =
+  //       `Código do erro: ${error.status}, ` + `mensagem: ${error.message}`;
+  //   }
 
-    return throwError(errorMessage);
-  }
+  //   return throwError(errorMessage);
+  // }
 }

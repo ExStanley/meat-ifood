@@ -3,13 +3,15 @@ import { CartItem } from './../restaurant-detail/shopping-cart/cart-item.model';
 import { ShoppingCartService } from './../restaurant-detail/shopping-cart/shopping-cart.service';
 import { Injectable } from '@angular/core';
 import { Order } from './order.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 
 @Injectable()
 export class OrderService {
-  constructor(private cartService: ShoppingCartService, private http: HttpClient) {}
+  constructor(private cartService: ShoppingCartService,
+    private http: HttpClient,
+    ) {}
 
   cartItems(): CartItem[] {
     return this.cartService.items;

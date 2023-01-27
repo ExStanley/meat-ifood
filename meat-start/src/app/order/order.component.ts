@@ -5,6 +5,7 @@ import { RadioOption } from './../shared/radio/radio-option.model';
 import { Component, OnInit } from '@angular/core';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-order',
@@ -15,6 +16,7 @@ export class OrderComponent implements OnInit {
 
   orderForm: FormGroup
   delivery: number = 8
+  orderId: string
 
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   numberPattern = /^[0-9]*$/
@@ -75,12 +77,18 @@ export class OrderComponent implements OnInit {
     order.orderItems = this.cartItems()
         .map((item:CartItem)=> new OrderItem(item.quantity, item.menuItem.id))
 
-    this.orderService.checkOrder(order).subscribe((orderId: string) => {
+    this.orderService.checkOrder(order)
+    .pipe(tap((orderId: string)=>{
+      this.orderId = orderId
+    }))
+    .subscribe((orderId: string) => {
       this.router.navigate(['/order-summary'])
-      console.log(`Compra concluída ${orderId}`)
       this.orderService.clear()
     })
-    console.log(order)
+  }
+
+  isOrderCompleted(): boolean{
+    return this.orderId !== undefined
   }
 
 }

@@ -1,5 +1,4 @@
 import { MenuItem } from './../restaurant-detail/menu-item/menu-item.model';
-import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs';
 import { catchError, map, retry } from 'rxjs/operators';
 import { MET_API } from './../app.api';
@@ -19,16 +18,14 @@ export class RestaurantsService extends BaseService<Restaurant> {
   reviewsOfRestaurant(id: string): Observable<any>{
     return this.http.get<any>(`${MET_API.url}/${MET_API.endRestaurants}/${id}/reviews`)
     .pipe(
-      retry(2),
-      catchError(this.handleError)
+      retry(2)
     )
   }
 
   menuOfRestaurant(id: string): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(`${MET_API.url}/${MET_API.endRestaurants}/${id}/menu`)
     .pipe(
-      retry(2),
-      catchError(this.handleError)
+      retry(2)
     )
   }
 

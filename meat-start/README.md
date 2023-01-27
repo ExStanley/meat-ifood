@@ -145,3 +145,16 @@ Dependências dos pacotes que devem ficar em package.json:
 ## Créditos
 
 Todas as imagens usadas na aplicação são pertencentes a freepik.com
+
+## monitora uma pasta com arquivos typeScript
+```typescript
+  tsc -w
+```
+## monitora as alterações realizadas em tempo de projeto
+```node
+  nodemon --watch backend backend/dist/server.js
+```
+## Criando um certificado auto assinado
+```node
+  openssl req -newkey rsa:2048 -nodes -keyout key.pem -x509 -days 365 -out certificate.pem
+```
