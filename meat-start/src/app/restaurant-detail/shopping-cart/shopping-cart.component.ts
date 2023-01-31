@@ -7,6 +7,7 @@ import { animate, keyframes, state, style, transition, trigger } from '@angular/
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss'],
+  preserveWhitespaces: true,
   animations: [
     trigger('row', [
       state('ready', style({opacity: 1})),

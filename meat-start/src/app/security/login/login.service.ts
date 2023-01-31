@@ -12,10 +12,10 @@ export class LoginService {
   user: User
   lastUrl: string
 
-  constructor(private http: HttpClient,private router: Router) {
+  constructor(private http: HttpClient, private router: Router) {
     this.router.events
-       .pipe(filter(e=>e instanceof NavigationEnd))
-       .subscribe((e:NavigationEnd)=>this.lastUrl = e.url)
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe((e: NavigationEnd) => this.lastUrl = e.url)
   }
 
 
@@ -30,10 +30,10 @@ export class LoginService {
     }).pipe(map(user => this.user = user));
   }
 
-  handleLogin(path: string = this.lastUrl){
+  handleLogin(path: string = this.lastUrl) {
     this.router.navigate(['/login', btoa(path)])
   }
-  logout(){
+  logout() {
     this.user = undefined;
   }
 }

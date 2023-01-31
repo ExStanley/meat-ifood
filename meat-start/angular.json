@@ -32,20 +32,22 @@
               "./src/bootstrap/css/bootstrap.min.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "./src/assets/css/AdminLTE.css",
-              "./src/assets/css/skins/skin-red.css",
+              "./src/assets/css/skins/skin-red.min.css",
               "./src/plugins/iCheck/flat/red.css",
               "./src/assets/css/meat.css",
               "./src/styles.css",
               "./src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js"
+            ]
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
+                  "src": "src/environments/environment.ts",
+                  "replaceWith": "src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
